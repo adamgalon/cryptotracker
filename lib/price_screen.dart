@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'coin_data.dart';
+import 'components/crypto_card.dart';
+import 'constants.dart';
 import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
@@ -102,86 +104,117 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              CryptoCard(
-                cryptoCurrency: 'BTC',
-                value: isWaiting ? '?' : coinValues['BTC'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                cryptoCurrency: 'ETH',
-                value: isWaiting ? '?' : coinValues['ETH'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                cryptoCurrency: 'LTC',
-                value: isWaiting ? '?' : coinValues['LTC'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                cryptoCurrency: 'XRP',
-                value: isWaiting ? '?' : coinValues['XRP'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                cryptoCurrency: 'BCH',
-                value: isWaiting ? '?' : coinValues['BCH'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                cryptoCurrency: 'ALGO',
-                value: isWaiting ? '?' : coinValues['ALGO'],
-                selectedCurrency: selectedCurrency,
-              ),
-            ],
-          ),
-          Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.black,
-            child: Platform.isIOS ? iOSPicker() : androidDropdown(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CryptoCard extends StatelessWidget {
-  const CryptoCard({
-    this.value,
-    this.selectedCurrency,
-    this.cryptoCurrency,
-  });
-
-  final String value;
-  final String selectedCurrency;
-  final String cryptoCurrency;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-      child: Card(
-        color: Colors.grey[400],
-        elevation: 5.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-          child: Text(
-            '1 $cryptoCurrency = $value $selectedCurrency',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.white,
+          //in the future will be added delate button and add button (no hardcoded currencies).
+          Expanded(flex: 5,
+            child: ListView(
+              children: [
+                CryptoCard(
+                  cryptoCurrency: 'BTC',
+                  value: isWaiting ? '?' : coinValues['BTC'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'ETH',
+                  value: isWaiting ? '?' : coinValues['ETH'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'LTC',
+                  value: isWaiting ? '?' : coinValues['LTC'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'XRP',
+                  value: isWaiting ? '?' : coinValues['XRP'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'BCH',
+                  value: isWaiting ? '?' : coinValues['BCH'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'ALGO',
+                  value: isWaiting ? '?' : coinValues['ALGO'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'YFI',
+                  value: isWaiting ? '?' : coinValues['YFI'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'EOS',
+                  value: isWaiting ? '?' : coinValues['EOS'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'LTC',
+                  value: isWaiting ? '?' : coinValues['LTC'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'SUSHI',
+                  value: isWaiting ? '?' : coinValues['SUSHI'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'DOT',
+                  value: isWaiting ? '?' : coinValues['DOT'],
+                  selectedCurrency: selectedCurrency,
+                ),
+                CryptoCard(
+                  cryptoCurrency: 'XSP',
+                  value: isWaiting ? '?' : coinValues['XSP'],
+                  selectedCurrency: selectedCurrency,
+                ),
+              ],
             ),
           ),
-        ),
+          Expanded(flex:1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton(
+                  onPressed: () {
+                    print('add');
+                  },
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                    child: Icon(
+                      Icons.add,
+                      size: 70.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Platform.isIOS ? iOSPicker() : androidDropdown(),
+                FlatButton(
+                  onPressed: () {
+                    print('Clear');
+                  },
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+                    child: Icon(
+                      Icons.clear,
+                      size: 70.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Container(
+          //     height: 150.0,
+          //     alignment: Alignment.center,
+          //     padding: EdgeInsets.only(bottom: 30.0),
+          //     color: Colors.black,
+          //     child:
+          // ),
+        ],
       ),
     );
   }
